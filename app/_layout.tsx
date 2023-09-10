@@ -14,18 +14,19 @@ import {
 import { useCallback, useEffect } from "react";
 import { MaterialDark, MaterialLight, fontConfig } from "@styles/material";
 import { ThemeProvider } from "@react-navigation/native";
-import theme, { ReText, darkTheme } from "@styles/theme";
+import theme, { Box, ReText, darkTheme } from "@styles/theme";
 import Colors from "@styles/colors";
 import { I18nManager, Platform, ScrollView, UIManager } from "react-native";
-import { Stack, SplashScreen, useSegments } from "expo-router";
+import { Stack, SplashScreen } from "expo-router";
 import {
   DarkNavigationColors,
   LightNavigationColors,
 } from "@styles/navigation";
 import RNRestart from "react-native-restart";
 import { getDataFromStorage } from "@utils/helper";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@components/header";
+import { useNetInfo } from "@react-native-community/netinfo";
+import NoConnection from "@components/noConnection";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -79,8 +80,8 @@ export default function RootLayout() {
   ScrollView.defaultProps.showsVerticalScrollIndicator = false;
   ScrollView.defaultProps.showsHorizontalScrollIndicator = false;
 
-  const segments = useSegments();
   const { isDark } = useStore();
+  const { isConnected } = useNetInfo();
 
   const forceRTL = () => {
     if (!I18nManager.isRTL) {
@@ -98,10 +99,6 @@ export default function RootLayout() {
     forceRTL();
     getTheme();
   }, []);
-
-  useEffect(() => {
-    console.log(segments);
-  }, [segments]);
 
   const [fontsLoaded] = useFonts({
     CairoReg: require("@assets/fonts/Cairo-Reg.ttf"),
@@ -128,6 +125,8 @@ export default function RootLayout() {
     fonts: configureFonts({ config: fontConfig }),
   };
 
+  if (isConnected === false) return <NoConnection />;
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReThemeProvider theme={isDark ? darkTheme : theme}>
@@ -141,14 +140,10 @@ export default function RootLayout() {
           <ThemeProvider
             value={isDark ? DarkNavigationColors : LightNavigationColors}
           >
-            <SafeAreaView
+            <Box
+              flex={1}
+              backgroundColor="mainBackground"
               onLayout={onLayoutRootView}
-              style={{
-                flex: 1,
-                backgroundColor: isDark
-                  ? Colors.darkBackground
-                  : Colors.lightBackground,
-              }}
             >
               <Stack
                 screenOptions={{
@@ -172,9 +167,14 @@ export default function RootLayout() {
                     ),
                   }}
                 />
-                <Stack.Screen name="gardens/[gardenId]" />
+                <Stack.Screen
+                  name="gardens/[gardenId]"
+                  options={{
+                    title: "",
+                  }}
+                />
               </Stack>
-            </SafeAreaView>
+            </Box>
           </ThemeProvider>
         </PaperProvider>
       </ReThemeProvider>
