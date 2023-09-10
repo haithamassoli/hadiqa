@@ -8,7 +8,7 @@ const Colors = {
   overlay: "rgba(28,29,28,0.5)",
   lightShadow: "rgba(34, 34, 34, 0.081)",
   darkShadow: "rgba(255, 255, 255, 0.1)",
-  primary: "#212529",
+  primary: "rgb(0, 100, 149)",
   black: "#14181D",
   black1: "#2B2F34",
   black2: "#43464A",
