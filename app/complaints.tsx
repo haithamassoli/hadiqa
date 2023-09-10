@@ -86,8 +86,8 @@ const ComplaintsScreen = () => {
               outlineStyle={{
                 borderRadius: ms(18),
                 backgroundColor: isDark
-                  ? Colors.darkBackgroundSec
-                  : Colors.lightBackgroundSec,
+                  ? Colors.darkBackground
+                  : Colors.lightBackground,
               }}
               style={{
                 width: "100%",
