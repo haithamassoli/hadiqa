@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#121212",
+    "backgroundColor": "#fff",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -46,12 +46,12 @@
     },
     "extra": {
       "firebase": {
-        "apiKey": "",
-        "authDomain": "",
-        "projectId": "",
-        "storageBucket": "",
-        "messagingSenderId": "",
-        "appId": ""
+        "apiKey": "AIzaSyDOpahCleR8Zl-0zy0AW98h5C7INyfy6kI",
+        "authDomain": "hadiqa-jo.firebaseapp.com",
+        "projectId": "hadiqa-jo",
+        "storageBucket": "hadiqa-jo.appspot.com",
+        "messagingSenderId": "308027500150",
+        "appId": "1:308027500150:web:5974561ea14f85739de157"
       },
       "router": {
         "origin": false

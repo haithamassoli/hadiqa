@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "308027500150",
+    "project_id": "hadiqa-jo",
+    "storage_bucket": "hadiqa-jo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308027500150:android:cd9bae8ae1476eb39de157",
+        "android_client_info": {
+          "package_name": "com.haithamassoli.hadiqa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6fvbPFp5RPj4SyTqEWT4PYE5xHITTSuM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
