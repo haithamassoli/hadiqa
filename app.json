@@ -23,13 +23,18 @@
       "bundleIdentifier": "com.haithamassoli.hadiqa"
     },
     "android": {
-      "versionCode": 1,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.haithamassoli.hadiqa",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCakA0DQHqUH0scKH1-80WYkHFwXqqcq_A"
+        }
+      }
     },
     "plugins": [
       [
@@ -55,6 +60,9 @@
       },
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "43a573e3-617f-4583-be17-e8fe4d4856a5"
       }
     }
   }

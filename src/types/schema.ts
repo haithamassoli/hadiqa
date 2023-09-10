@@ -11,3 +11,13 @@ export const validationComplaintsSchema = z.object({
 export type validationComplaintsSchemaType = z.infer<
   typeof validationComplaintsSchema
 >;
+
+export const validationSearchSchema = z.object({
+  search: z
+    .string({
+      required_error: "حقل البحث يجب أن لا يكون فارغ",
+    })
+    .min(2, "حقل البحث يجب أن يكون على الأقل 2 أحرف"),
+});
+
+export type validationSearchSchemaType = z.infer<typeof validationSearchSchema>;
