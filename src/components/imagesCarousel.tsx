@@ -1,11 +1,11 @@
 import { useState, memo } from "react";
-import { LayoutAnimation } from "react-native";
 import { useTheme } from "@shopify/restyle";
 import { hs, ms } from "@utils/platform";
 import { Box, Theme } from "@styles/theme";
 import { blurhash, width } from "@utils/helper";
 import { Image } from "expo-image";
 import Carousel from "react-native-reanimated-carousel";
+import Animated, { SlideInLeft } from "react-native-reanimated";
 
 type Props = {
   images: string[];
@@ -18,20 +18,13 @@ const ImagesCarousel = ({ images }: Props) => {
   return (
     <>
       <Carousel
-        loop
         width={width}
         height={width / 2}
         autoPlay={true}
         data={images!}
         autoPlayInterval={3000}
         autoPlayReverse
-        pagingEnabled
-        scrollAnimationDuration={1000}
-        onSnapToItem={(index) => {
-          console.log(index);
-          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-          setSelectedIndex(index);
-        }}
+        onSnapToItem={setSelectedIndex}
         renderItem={({ item }) => (
           <Image
             source={item}
@@ -49,22 +42,28 @@ const ImagesCarousel = ({ images }: Props) => {
       />
       <Box flexDirection="row" justifyContent="flex-end" marginTop="vs">
         {images.map((_, index) => (
-          <Box
+          <Animated.View
             key={index}
-            height={ms(8)}
-            width={ms(8)}
-            borderRadius="l"
-            marginHorizontal="hxs"
-            marginVertical="vxs"
-            style={{
-              backgroundColor:
-                index === images.length - selectedIndex - 1
-                  ? colors.primary
-                  : colors.black6,
-              width:
-                index === images.length - selectedIndex - 1 ? ms(24) : ms(8),
-            }}
-          />
+            layout={SlideInLeft.withInitialValues({
+              originX: 0,
+            })}
+          >
+            <Box
+              height={ms(8)}
+              width={ms(8)}
+              borderRadius="l"
+              marginHorizontal="hxs"
+              marginVertical="vxs"
+              style={{
+                backgroundColor:
+                  index === images.length - selectedIndex - 1
+                    ? colors.primary
+                    : colors.black6,
+                width:
+                  index === images.length - selectedIndex - 1 ? ms(24) : ms(8),
+              }}
+            />
+          </Animated.View>
         ))}
       </Box>
     </>
