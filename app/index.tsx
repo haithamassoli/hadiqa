@@ -2,11 +2,11 @@ import { useData } from "@apis/data";
 import Loading from "@components/loading";
 import NoConnection from "@components/noConnection";
 import SearchInput from "@components/searchInput";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { useNetInfo } from "@react-native-community/netinfo";
+import { useTheme } from "@shopify/restyle";
 import { darkMapJson, lightMapJson } from "@src/data/map";
-import Colors from "@styles/colors";
-import { Box } from "@styles/theme";
+import { Box, ReText, Theme } from "@styles/theme";
 import { hs, ms, vs } from "@utils/platform";
 import { useStore } from "@zustand/store";
 import { router } from "expo-router";
@@ -18,6 +18,7 @@ const HomeScreen = () => {
   const { isConnected } = useNetInfo();
   const { isDark, toggleTheme } = useStore();
   const { data, isLoading } = useData();
+  const { colors } = useTheme<Theme>();
 
   if (isConnected === false) return <NoConnection />;
   if (isLoading) return <Loading />;
@@ -55,14 +56,14 @@ const HomeScreen = () => {
         entering={FadeInUp.duration(600).delay(200)}
         style={styles.searchContainer}
       >
-        <Box width={"86%"} height={ms(48)}>
+        <Box width={"86%"} height={vs(48)} marginBottom="vs">
           <SearchInput list={data} />
         </Box>
         <TouchableOpacity onPress={toggleTheme} style={styles.toggle}>
           <Feather
             name={isDark ? "sun" : "moon"}
             size={ms(24)}
-            color={isDark ? Colors.lightText : Colors.darkText}
+            color={colors.text}
           />
         </TouchableOpacity>
       </Animated.View>
@@ -83,17 +84,15 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 10,
     paddingHorizontal: hs(16),
-    paddingTop: vs(72),
+    marginTop: vs(82),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
   toggle: {
     width: "12%",
-    height: ms(48),
+    height: vs(48),
     justifyContent: "center",
-    alignSelf: "center",
     alignItems: "center",
-    paddingTop: vs(22),
   },
 });
