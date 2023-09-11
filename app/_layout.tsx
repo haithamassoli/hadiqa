@@ -25,8 +25,6 @@ import {
 import RNRestart from "react-native-restart";
 import { getDataFromStorage } from "@utils/helper";
 import Header from "@components/header";
-import { useNetInfo } from "@react-native-community/netinfo";
-import NoConnection from "@components/noConnection";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -81,7 +79,6 @@ export default function RootLayout() {
   ScrollView.defaultProps.showsHorizontalScrollIndicator = false;
 
   const { isDark } = useStore();
-  const { isConnected } = useNetInfo();
 
   const forceRTL = () => {
     if (!I18nManager.isRTL) {
@@ -124,8 +121,6 @@ export default function RootLayout() {
       : { ...MD3LightTheme.colors, ...MaterialLight },
     fonts: configureFonts({ config: fontConfig }),
   };
-
-  if (isConnected === false) return <NoConnection />;
 
   return (
     <QueryClientProvider client={queryClient}>

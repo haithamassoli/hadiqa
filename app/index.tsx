@@ -1,7 +1,9 @@
 import { useData } from "@apis/data";
 import Loading from "@components/loading";
+import NoConnection from "@components/noConnection";
 import SearchInput from "@components/searchInput";
 import { Feather } from "@expo/vector-icons";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { darkMapJson, lightMapJson } from "@src/data/map";
 import Colors from "@styles/colors";
 import { Box } from "@styles/theme";
@@ -13,9 +15,11 @@ import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
 const HomeScreen = () => {
+  const { isConnected } = useNetInfo();
   const { isDark, toggleTheme } = useStore();
   const { data, isLoading } = useData();
 
+  if (isConnected === false) return <NoConnection />;
   if (isLoading) return <Loading />;
 
   const showLocationsOfInterest = () => {
