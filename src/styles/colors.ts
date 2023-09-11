@@ -9,6 +9,8 @@ const Colors = {
   lightShadow: "rgba(34, 34, 34, 0.081)",
   darkShadow: "rgba(255, 255, 255, 0.1)",
   primary: "rgb(0, 100, 149)",
+  lightPrimary: "rgb(0, 100, 149)",
+  darkPrimary: "rgb(143, 205, 255)",
   black: "#14181D",
   black1: "#2B2F34",
   black2: "#43464A",
