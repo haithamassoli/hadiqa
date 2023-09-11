@@ -105,7 +105,7 @@ const GardenScreen = () => {
             marginHorizontal: hs(8),
           }}
         >
-          <Feather name="map-pin" size={ms(24)} color={colors.lightText} />
+          <Feather name="map-pin" size={ms(24)} color={colors.mainBackground} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -122,7 +122,7 @@ const GardenScreen = () => {
             height: vs(46),
           }}
         >
-          <Feather name="share-2" size={ms(24)} color={colors.lightText} />
+          <Feather name="share-2" size={ms(24)} color={colors.mainBackground} />
         </TouchableOpacity>
       </Box>
       <Accordion

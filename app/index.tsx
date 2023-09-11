@@ -29,10 +29,29 @@ const HomeScreen = () => {
         <Marker
           key={index}
           coordinate={item?.location}
-          title={item?.title}
-          pinColor={Colors.primary}
-          onPress={() => router.push(`/gardens/${item.id}`)}
-        />
+          pinColor={colors.primary}
+          onPress={() => router.push(`/gardens/${item?.id}`)}
+        >
+          <Box
+            paddingHorizontal="hs"
+            paddingVertical="vs"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <ReText
+              variant="LabelLarge"
+              fontFamily="CairoBold"
+              color="primary2"
+            >
+              {item?.title}
+            </ReText>
+            <Ionicons
+              name="location-sharp"
+              size={ms(38)}
+              color={colors.primary}
+            />
+          </Box>
+        </Marker>
       );
     });
   };
