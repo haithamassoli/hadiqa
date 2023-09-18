@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 type Data = {
   id: string;
   title: string;
+  category: "حديقة" | "مكتبة";
   images: string[];
   locationLink: string;
   location: {
