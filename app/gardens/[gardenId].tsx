@@ -11,6 +11,7 @@ import { Stack, router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { Linking, ScrollView, Share, TouchableOpacity } from "react-native";
 import Accordion from "react-native-collapsible/Accordion";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 type SECTIONSTYPE = { title: string; content: string };
 
@@ -26,36 +27,50 @@ const GardenScreen = () => {
 
   if (isLoading) return <Loading />;
 
-  const renderHeader = (section: SECTIONSTYPE) => {
+  const renderHeader = (section: SECTIONSTYPE, index: number) => {
     return (
-      <Box
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="center"
-        backgroundColor="mainBackground"
-        paddingHorizontal="hm"
-        paddingVertical="vs"
-        borderRadius="m"
+      <Animated.View
+        entering={FadeInUp.withInitialValues({
+          transform: [
+            {
+              translateY: vs(125),
+            },
+          ],
+        })
+          .duration(600)
+          .delay(index * 200 + 400)}
       >
-        <ReText fontFamily="CairoBold" textAlign="left" variant="BodyLarge">
-          {section.title}
-        </ReText>
-        <Feather name="chevron-down" size={ms(20)} color={colors.text} />
-      </Box>
+        <Box
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+          backgroundColor="mainBackground"
+          paddingHorizontal="hm"
+          paddingVertical="vs"
+          borderRadius="m"
+        >
+          <ReText fontFamily="CairoBold" textAlign="left" variant="BodyLarge">
+            {section.title}
+          </ReText>
+          <Feather name="chevron-down" size={ms(20)} color={colors.text} />
+        </Box>
+      </Animated.View>
     );
   };
 
-  const renderContent = (section: SECTIONSTYPE) => {
+  const renderContent = (section: SECTIONSTYPE, index: number) => {
     return (
-      <Box
-        backgroundColor="secBackground"
-        paddingHorizontal="hm"
-        paddingVertical="vs"
-      >
-        <ReText variant="BodyLarge" textAlign="left">
-          {section.content}
-        </ReText>
-      </Box>
+      <Animated.View entering={FadeInUp.duration(600)}>
+        <Box
+          backgroundColor="secBackground"
+          paddingHorizontal="hm"
+          paddingVertical="vs"
+        >
+          <ReText variant="BodyLarge" textAlign="left">
+            {section.content}
+          </ReText>
+        </Box>
+      </Animated.View>
     );
   };
 
@@ -80,70 +95,94 @@ const GardenScreen = () => {
           ),
         }}
       />
-      <ImagesCarousel images={data?.images!} color={primaryColor} />
+      <Animated.View entering={FadeInUp.duration(600)}>
+        <ImagesCarousel images={data?.images!} color={primaryColor} />
+      </Animated.View>
       <Box height={vs(18)} />
-      <Box
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="space-between"
-        marginBottom="vm"
+      <Animated.View entering={FadeInUp.duration(600).delay(200)}>
+        <Box
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
+          marginBottom="vm"
+        >
+          <CustomButton
+            title="للشكاوى والملاحظات"
+            onPress={() => router.push(`/complaints?color=${primaryColor}`)}
+            style={{
+              width: "64%",
+              borderRadius: ms(18),
+              backgroundColor: primaryColor,
+            }}
+          />
+          <TouchableOpacity
+            onPress={() => Linking.openURL(data?.locationLink!)}
+            style={{
+              backgroundColor: primaryColor,
+              borderRadius: ms(18),
+              justifyContent: "center",
+              alignItems: "center",
+              paddingHorizontal: hs(12),
+              height: vs(46),
+              marginHorizontal: hs(8),
+            }}
+          >
+            <Feather
+              name="map-pin"
+              size={ms(24)}
+              color={colors.mainBackground}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              Share.share({
+                message: `مرحباً، أنصحك بزيارة ${data?.title!}، للمزيد من المعلومات قم بزيارة الرابط التالي: ${data?.locationLink!}`,
+              })
+            }
+            style={{
+              backgroundColor: primaryColor,
+              borderRadius: ms(18),
+              justifyContent: "center",
+              alignItems: "center",
+              paddingHorizontal: hs(12),
+              height: vs(46),
+            }}
+          >
+            <Feather
+              name="share-2"
+              size={ms(24)}
+              color={colors.mainBackground}
+            />
+          </TouchableOpacity>
+        </Box>
+      </Animated.View>
+      <Animated.View
+        entering={FadeInUp.withInitialValues({
+          transform: [
+            {
+              translateY: vs(325),
+            },
+          ],
+        })
+          .duration(600)
+          .delay(400)}
       >
-        <CustomButton
-          title="للشكاوى والملاحظات"
-          onPress={() => router.push(`/complaints?color=${primaryColor}`)}
-          style={{
-            width: "64%",
-            borderRadius: ms(18),
-            backgroundColor: primaryColor,
+        <Accordion
+          sections={data?.accordion!}
+          sectionContainerStyle={{
+            backgroundColor: colors.secBackground,
+            borderRadius: ms(10),
+            marginBottom: vs(12),
+            paddingHorizontal: hs(14),
+            paddingVertical: vs(8),
           }}
+          activeSections={activeSections}
+          renderHeader={renderHeader}
+          renderContent={renderContent}
+          onChange={updateSections}
+          touchableComponent={TouchableOpacity}
         />
-        <TouchableOpacity
-          onPress={() => Linking.openURL(data?.locationLink!)}
-          style={{
-            backgroundColor: primaryColor,
-            borderRadius: ms(18),
-            justifyContent: "center",
-            alignItems: "center",
-            paddingHorizontal: hs(12),
-            height: vs(46),
-            marginHorizontal: hs(8),
-          }}
-        >
-          <Feather name="map-pin" size={ms(24)} color={colors.mainBackground} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            Share.share({
-              message: `مرحباً، أنصحك بزيارة ${data?.title!}، للمزيد من المعلومات قم بزيارة الرابط التالي: ${data?.locationLink!}`,
-            })
-          }
-          style={{
-            backgroundColor: primaryColor,
-            borderRadius: ms(18),
-            justifyContent: "center",
-            alignItems: "center",
-            paddingHorizontal: hs(12),
-            height: vs(46),
-          }}
-        >
-          <Feather name="share-2" size={ms(24)} color={colors.mainBackground} />
-        </TouchableOpacity>
-      </Box>
-      <Accordion
-        sections={data?.accordion!}
-        sectionContainerStyle={{
-          backgroundColor: colors.secBackground,
-          borderRadius: ms(10),
-          marginBottom: vs(12),
-          paddingHorizontal: hs(14),
-          paddingVertical: vs(8),
-        }}
-        activeSections={activeSections}
-        renderHeader={renderHeader}
-        renderContent={renderContent}
-        onChange={updateSections}
-        touchableComponent={TouchableOpacity}
-      />
+      </Animated.View>
     </ScrollView>
   );
 };
