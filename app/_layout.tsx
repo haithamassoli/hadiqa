@@ -156,7 +156,7 @@ export default function RootLayout() {
                   options={{
                     header: (props) => (
                       <Header
-                        title="الشكاوى والإقتراحات"
+                        title="الشكاوى والملاحظات"
                         onPress={() => props.navigation.goBack()}
                       />
                     ),

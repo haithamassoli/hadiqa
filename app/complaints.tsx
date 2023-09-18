@@ -20,10 +20,17 @@ import { ScrollView } from "react-native";
 import { addComplaintMutation } from "@apis/complaints";
 import { router } from "expo-router";
 import Colors from "@styles/colors";
+import { useLocalSearchParams } from "expo-router";
 
 const ComplaintsScreen = () => {
   const [imageList, pickImage, isLoadingImage] = useImagePicker();
   const { isDark } = useStore();
+  const {
+    color,
+  }: {
+    color: string;
+  } = useLocalSearchParams();
+
   const { control, handleSubmit, reset } =
     useForm<validationComplaintsSchemaType>({
       resolver: zodResolver(validationComplaintsSchema),
@@ -48,7 +55,7 @@ const ComplaintsScreen = () => {
     });
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading color={color} />;
 
   return (
     <ScrollView
@@ -67,7 +74,7 @@ const ComplaintsScreen = () => {
         <Box>
           <Animated.View entering={FadeInUp.duration(600)}>
             <ReText variant="BodyMedium" textAlign="left" marginBottom="vs">
-              يمكنك تقديم شكوى أو اقتراح للهيئة المستقلة للانتخاب
+              يمكنك تقديم شكوى أو اقتراح لأمانة عمان
             </ReText>
           </Animated.View>
           <Animated.View
@@ -83,6 +90,12 @@ const ComplaintsScreen = () => {
               placeholder={"أدخل الشكوى أو الإقتراح"}
               inputMode="text"
               textAlignVertical="top"
+              cursorColor={color}
+              selectionColor={color}
+              underlineColor={color}
+              activeOutlineColor={color}
+              underlineColorAndroid={color}
+              activeUnderlineColor={color}
               outlineStyle={{
                 borderRadius: ms(18),
                 backgroundColor: isDark
@@ -106,6 +119,7 @@ const ComplaintsScreen = () => {
               style={{
                 width: "96%",
               }}
+              textColor={color}
               onPress={async () => {
                 const { status } =
                   await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -145,6 +159,9 @@ const ComplaintsScreen = () => {
           title="إرسال"
           mode="contained"
           onPress={handleSubmit(onSubmit)}
+          style={{
+            backgroundColor: color || Colors.primary,
+          }}
         />
       </Box>
     </ScrollView>

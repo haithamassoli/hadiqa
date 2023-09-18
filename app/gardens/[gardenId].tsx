@@ -21,6 +21,9 @@ const GardenScreen = () => {
 
   const { data, isLoading } = useDataById(gardenId);
 
+  const primaryColor =
+    data?.category === "مكتبة" ? colors.libraryPrimary : colors.primary;
+
   if (isLoading) return <Loading />;
 
   const renderHeader = (section: SECTIONSTYPE) => {
@@ -77,7 +80,7 @@ const GardenScreen = () => {
           ),
         }}
       />
-      <ImagesCarousel images={data?.images!} />
+      <ImagesCarousel images={data?.images!} color={primaryColor} />
       <Box height={vs(18)} />
       <Box
         flexDirection="row"
@@ -87,16 +90,17 @@ const GardenScreen = () => {
       >
         <CustomButton
           title="للشكاوى والملاحظات"
-          onPress={() => router.push("/complaints")}
+          onPress={() => router.push(`/complaints?color=${primaryColor}`)}
           style={{
             width: "64%",
             borderRadius: ms(18),
+            backgroundColor: primaryColor,
           }}
         />
         <TouchableOpacity
           onPress={() => Linking.openURL(data?.locationLink!)}
           style={{
-            backgroundColor: colors.primary,
+            backgroundColor: primaryColor,
             borderRadius: ms(18),
             justifyContent: "center",
             alignItems: "center",
@@ -114,7 +118,7 @@ const GardenScreen = () => {
             })
           }
           style={{
-            backgroundColor: colors.primary,
+            backgroundColor: primaryColor,
             borderRadius: ms(18),
             justifyContent: "center",
             alignItems: "center",

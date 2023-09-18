@@ -9,9 +9,10 @@ import Animated, { SlideInLeft } from "react-native-reanimated";
 
 type Props = {
   images: string[];
+  color: string;
 };
 
-const ImagesCarousel = ({ images }: Props) => {
+const ImagesCarousel = ({ images, color }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { colors } = useTheme<Theme>();
 
@@ -57,7 +58,7 @@ const ImagesCarousel = ({ images }: Props) => {
               style={{
                 backgroundColor:
                   index === images.length - selectedIndex - 1
-                    ? colors.primary
+                    ? color
                     : colors.black6,
                 width:
                   index === images.length - selectedIndex - 1 ? ms(24) : ms(8),

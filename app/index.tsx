@@ -25,11 +25,13 @@ const HomeScreen = () => {
 
   const showLocationsOfInterest = () => {
     return data?.map((item, index) => {
+      const primaryColor =
+        item?.category === "مكتبة" ? colors.libraryPrimary : colors.primary;
       return (
         <Marker
           key={index}
           coordinate={item?.location}
-          pinColor={colors.primary}
+          pinColor={primaryColor}
           onPress={() => router.push(`/gardens/${item?.id}`)}
         >
           <Box
@@ -41,14 +43,14 @@ const HomeScreen = () => {
             <ReText
               variant="LabelLarge"
               fontFamily="CairoBold"
-              color="primary2"
+              color={item?.category === "مكتبة" ? "libraryPrimary" : "primary"}
             >
               {item?.title}
             </ReText>
             <Ionicons
               name="location-sharp"
               size={ms(38)}
-              color={colors.primary}
+              color={primaryColor}
             />
           </Box>
         </Marker>
@@ -62,9 +64,9 @@ const HomeScreen = () => {
         provider={PROVIDER_GOOGLE}
         style={styles.container}
         initialRegion={{
-          latitude: 31.954620555386903,
-          longitude: 35.90197721349148,
-          latitudeDelta: 0.0922,
+          latitude: 31.94821567172181,
+          longitude: 35.92306171989714,
+          latitudeDelta: 0.1222,
           longitudeDelta: 0.0421,
         }}
         customMapStyle={isDark ? darkMapJson : lightMapJson}
