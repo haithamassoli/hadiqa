@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "حديقة",
+    "name": "مرافق بلس",
     "slug": "hadiqa",
     "scheme": "hadiqa",
     "version": "1.0.0",
@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#80D997"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,10 +23,10 @@
       "bundleIdentifier": "com.haithamassoli.hadiqa"
     },
     "android": {
-      "versionCode": 5,
+      "versionCode": 7,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#80D997"
       },
       "package": "com.haithamassoli.hadiqa",
       "googleServicesFile": "./google-services.json",

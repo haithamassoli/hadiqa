@@ -3,7 +3,7 @@
 import { hs, ms, vs } from "@utils/platform";
 
 export const MaterialLight = {
-  primary: "rgb(0, 109, 55)",
+  primary: "rgb(0, 107, 85)",
   onPrimary: "rgb(255, 255, 255)",
   primaryContainer: "rgb(155, 246, 178)",
   onPrimaryContainer: "rgb(0, 33, 12)",

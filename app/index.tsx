@@ -26,7 +26,9 @@ const HomeScreen = () => {
   const showLocationsOfInterest = () => {
     return data?.map((item, index) => {
       const primaryColor =
-        item?.category === "مكتبة" ? colors.libraryPrimary : colors.primary;
+        item?.category === "مكتبة"
+          ? colors.libraryPrimaryMarker
+          : colors.primaryMarker;
       return (
         <Marker
           key={index}
@@ -43,7 +45,11 @@ const HomeScreen = () => {
             <ReText
               variant="LabelLarge"
               fontFamily="CairoBold"
-              color={item?.category === "مكتبة" ? "libraryPrimary" : "primary"}
+              color={
+                item?.category === "مكتبة"
+                  ? "libraryPrimaryMarker"
+                  : "primaryMarker"
+              }
             >
               {item?.title}
             </ReText>
