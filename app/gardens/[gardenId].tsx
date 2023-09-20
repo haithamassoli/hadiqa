@@ -27,7 +27,11 @@ const GardenScreen = () => {
 
   if (isLoading) return <Loading />;
 
-  const renderHeader = (section: SECTIONSTYPE, index: number) => {
+  const renderHeader = (
+    section: SECTIONSTYPE,
+    index: number,
+    isActive: boolean
+  ) => {
     return (
       <Animated.View
         entering={FadeInUp.withInitialValues({
@@ -52,7 +56,18 @@ const GardenScreen = () => {
           <ReText fontFamily="CairoBold" textAlign="left" variant="BodyLarge">
             {section.title}
           </ReText>
-          <Feather name="chevron-down" size={ms(20)} color={colors.text} />
+          <Feather
+            name="chevron-down"
+            size={ms(20)}
+            color={colors.text}
+            style={{
+              transform: [
+                {
+                  rotate: isActive ? "180deg" : "0deg",
+                },
+              ],
+            }}
+          />
         </Box>
       </Animated.View>
     );
