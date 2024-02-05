@@ -2,7 +2,8 @@ import { useData } from "@apis/data";
 import Loading from "@components/loading";
 import NoConnection from "@components/noConnection";
 import SearchInput from "@components/searchInput";
-import { Feather, Ionicons } from "@expo/vector-icons";
+import { ColorSchemeButton } from "@components/ui/colorSchemeButton";
+import { Ionicons } from "@expo/vector-icons";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { useTheme } from "@shopify/restyle";
 import { darkMapJson, lightMapJson } from "@src/data/map";
@@ -16,7 +17,7 @@ import Animated, { FadeInUp } from "react-native-reanimated";
 
 const HomeScreen = () => {
   const { isConnected } = useNetInfo();
-  const { isDark, toggleTheme } = useStore();
+  const { isDark } = useStore();
   const { data, isLoading } = useData();
   const { colors } = useTheme<Theme>();
 
@@ -86,13 +87,7 @@ const HomeScreen = () => {
         <Box width={"86%"} height={vs(48)} marginBottom="vs">
           <SearchInput list={data} />
         </Box>
-        <TouchableOpacity onPress={toggleTheme} style={styles.toggle}>
-          <Feather
-            name={isDark ? "sun" : "moon"}
-            size={ms(24)}
-            color={colors.text}
-          />
-        </TouchableOpacity>
+        <ColorSchemeButton />
       </Animated.View>
     </Box>
   );

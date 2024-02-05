@@ -6530,6 +6530,11 @@ react-native-screens@~3.29.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
+react-native-theme-switch-animation@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-theme-switch-animation/-/react-native-theme-switch-animation-0.6.0.tgz#4fa99d572ee683dbdfc9c3b2f088f77a1ecd113b"
+  integrity sha512-XC6xb1J6Pgq4XQFsq6KdxJugRHjwsj04qTDh9rZdi1mkNOy9QKtz7wCQHoK6q8CBZtF3R/sergCw9wZhIRXK3Q==
+
 react-native@0.73.2:
   version "0.73.2"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.73.2.tgz#74ee163c8189660d41d1da6560411da7ce41a608"
