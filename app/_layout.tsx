@@ -69,13 +69,18 @@ const getTheme = async () => {
 export default function RootLayout() {
   TextInput.defaultProps = TextInput.defaultProps || {};
   TextInput.defaultProps.allowFontScaling = false;
+  // @ts-ignore
   Text.defaultProps = Text.defaultProps || {};
+  // @ts-ignore
   Text.defaultProps.allowFontScaling = false;
   ReText.defaultProps = ReText.defaultProps || {};
   ReText.defaultProps.allowFontScaling = false;
 
+  // @ts-ignore
   ScrollView.defaultProps = ScrollView.defaultProps || {};
+  // @ts-ignore
   ScrollView.defaultProps.showsVerticalScrollIndicator = false;
+  // @ts-ignore
   ScrollView.defaultProps.showsHorizontalScrollIndicator = false;
 
   const { isDark } = useStore();

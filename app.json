@@ -23,7 +23,7 @@
       "bundleIdentifier": "com.haithamassoli.hadiqa"
     },
     "android": {
-      "versionCode": 8,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#80D997"
